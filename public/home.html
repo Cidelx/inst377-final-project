@@ -1,2 +1,26 @@
-Home Page
 <p>Home Page</p>
+<h1>Find Your University</h1>
+<input type="text" id="search" placeholder="Enter school name">
+<button onclick="searchUniversity()">Search</button>
+
+<div id="results"></div>
+
+<script>
+async function searchUniversity(){
+  const school = document.getElementById("search").value;
+  const url = `http://universities.hipolabs.com/search?name=${school}`;
+  const response = await fetch(url);
+  const data= await response.json();
+
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "";
+
+  data.forEach(u =>{
+    const p = document.createElement("p");
+    p.textContent = `${u.name} (${u.country})` ;
+    resultsDiv.appendChild(p);
+  });
+
+}
+</script>
+

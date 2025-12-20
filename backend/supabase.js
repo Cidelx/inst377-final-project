@@ -1,9 +1,8 @@
-import { 
+const { 
     createClient 
-} 
-from "@supabase/supabase-js";
+} = require("@supabase/supabase-js");
 
-const SUPABASE_URL = "https://waifbhduwgnxpzjimlws.supabase.co";
-const SUPABASE_KEY = "sb_publishable_qhCAFONj4oYBYqAyohZkpg_woCSGKTa";
-
-export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseUrl = "https://waifbhduwgnxpzjimlws.supabase.co";
+const supabaseKey = "sb_publishable_qhCAFONj4oYBYqAyohZkpg_woCSGKTa";
+const supabase = createClient(supabaseUrl, supabaseKey);
+module.exports = { supabase };
