@@ -32,7 +32,7 @@
 <script>
 //will load reviews when page opens
 async function loadReviews() {
-  const response = await fetch("/api/reviews");
+  const response = await fetch("http://localhost:3000/api/reviews");
   const reviews = await response.json();
 
   const container = document.getElementById("reviews-container");
@@ -62,7 +62,7 @@ document.getElementById("review-form").addEventListener("submit", async (e) => {
   const review = document.getElementById("review").value;
   const rating = document.getElementById("rating").value;
 
-  const response = await fetch("/api/reviews", {
+  const response = await fetch("http://localhost:3000/api/reviews", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ course, name, review, rating })

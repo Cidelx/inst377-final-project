@@ -31,7 +31,9 @@ app.post("/api/reviews", async (req, res) => {
 
   const { data, error } = await supabase
     .from("reviews")
-    .insert([{ course, name, review, rating }]);
+    .insert([{ course, name, review, rating }])
+    .select(); 
+
 
   if (error) {
     return res.status(500).json({ error: error.message });
