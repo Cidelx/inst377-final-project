@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = required("cors");
+const cors = require("cors");
 const app = express();
 
 app.use(cors());
@@ -40,5 +40,5 @@ app.post("/api/reviews", async (req, res) => {
   res.json(data);
 });
 
-const PORT = processLock.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
