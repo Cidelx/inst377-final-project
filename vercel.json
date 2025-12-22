@@ -15,6 +15,5 @@
       "src": "/(.*)",
       "dest": "backend/public/$1"
     }
-    
   ]
 }
