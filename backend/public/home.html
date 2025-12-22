@@ -1,26 +1,73 @@
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="help.html">Help</a>
+</nav>
+
 <p>Home Page</p>
 <h1>Find Your University</h1>
+
 <input type="text" id="search" placeholder="Enter school name">
 <button onclick="searchUniversity()">Search</button>
 
 <div id="results"></div>
 
+<h2>Search Summary</h2>
+<canvas id="chart" width="400" height="200"></canvas>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-async function searchUniversity(){
+let chart; 
+
+async function searchUniversity() {
   const school = document.getElementById("search").value;
   const url = `http://universities.hipolabs.com/search?name=${school}`;
   const response = await fetch(url);
-  const data= await response.json();
+  const data = await response.json();
 
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "";
 
-  data.forEach(u =>{
+  data.forEach(u => {
     const p = document.createElement("p");
-    p.textContent = `${u.name} (${u.country})` ;
+    p.textContent = `${u.name} (${u.country})`;
     resultsDiv.appendChild(p);
   });
 
+  updateChart(data);
+}
+
+// Build bar chart showing number of results per country
+function updateChart(data) {
+  const counts = {};
+
+  data.forEach(u => {
+    if (!counts[u.country]) counts[u.country] = 0;
+    counts[u.country]++;
+  });
+
+  const labels = Object.keys(counts);
+  const values = Object.values(counts);
+
+  const ctx = document.getElementById("chart").getContext("2d");
+
+  if (chart) {
+    chart.destroy();
+  }
+
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Universities Found",
+        data: values,
+        backgroundColor: "rgba(100,150,255,0.6)"
+      }]
+    }
+  });
 }
 </script>
-
