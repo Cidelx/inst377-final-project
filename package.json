@@ -1,0 +1,7 @@
+{
+  "name": "inst377-final-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd backend && npm install"
+  }
+}
